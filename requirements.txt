@@ -1,0 +1,6 @@
+prefect
+psycopg2-binary
+pandas
+numpy
+faker
+sqlalchemy
