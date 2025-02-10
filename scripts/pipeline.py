@@ -5,15 +5,15 @@ import os
 
 # Definir tareas
 @task
-def generar_dataset():
+def generate_dataset():
     subprocess.run(["python", "scripts/generate_messy_data.py"], check=True)
 
 @task
-def limpiar_dataset():
+def clean_dataset():
     subprocess.run(["python", "scripts/clean_messy_data.py"], check=True)
 
 @task
-def cargar_en_postgresql():
+def load_on_postgresql():
     conn = psycopg2.connect(
         dbname="postgresdb",
         user="postgres",
@@ -48,9 +48,9 @@ def cargar_en_postgresql():
 # Definir el flujo de Prefect
 @flow
 def pipeline_etl():
-    generar_dataset()
-    limpiar_dataset()
-    cargar_en_postgresql()
+    generate_dataset()
+    clean_dataset()
+    load_on_postgresql()
 
 # Ejecutar el flujo si se llama directamente
 if __name__ == "__main__":
